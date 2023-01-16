@@ -7,9 +7,9 @@ class Manager{
         $this->db = new Database;
     }
 
-    public function getCruises(){
+    public function getProducts(){
         $this->db->query('SELECT * 
-                        FROM cruise
+                        FROM produit
                         ');
 
         $results = $this->db->resultSet();
@@ -17,8 +17,8 @@ class Manager{
         return $results;
     }
 
-    public function addCruise($data){
-        $this->db->query('INSERT INTO `cruise`(`name`, `price`, `image`, `nights_number`, `departure_port_ID`, `departure_date`) VALUES(:name,:price,:image,:nights,:depPort,:depDate)');
+    public function addProduct($data){
+        $this->db->query('INSERT INTO `produit`(`name`, `price`, `image`, `nights_number`, `departure_port_ID`, `departure_date`) VALUES(:name,:price,:image,:nights,:depPort,:depDate)');
 
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':price', $data['price']);
@@ -30,11 +30,11 @@ class Manager{
         return $this->db->execute();
     }
 
-    public function updateCruise($data){
+    public function updateProduct($data){
 
         if (empty($data->image)) {
         
-            $this->db->query('UPDATE `cruise` SET `name`= :name ,`departure_date`= :date,`nights_number`=:nbr,`price`=:price,`departure_port_ID`=:idd WHERE `ID_croisere`=:id');
+            $this->db->query('UPDATE `produit` SET `name`= :name ,`departure_date`= :date,`nights_number`=:nbr,`price`=:price,`departure_port_ID`=:idd WHERE `ID_croisere`=:id');
             
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':date', $data['date']);

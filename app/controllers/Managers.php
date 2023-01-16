@@ -22,15 +22,15 @@ class Managers extends Controller
     $this->view('managers/dashboard', $data);
   }
 
-  public function cruises()
+  public function products()
   {
     // Get cruises
-    $cruises = $this->managerModel->getCruises();
+    $products = $this->managerModel->getProducts();
     $data = [
-      'cruises' => $cruises
+      'products' => $products
     ];
 
-    $this->view('managers/cruises', $data);
+    $this->view('managers/products', $data);
   }
 
   public function ships()
@@ -52,16 +52,16 @@ class Managers extends Controller
   }
 
 
-  public function addCruisePage()
+  public function addproductPage()
   {
     $data = [
-      'title' => 'Add cruises'
+      'title' => 'Add product'
     ];
 
-    $this->view('managers/addCruise', $data);
+    $this->view('managers/addProduct', $data);
   }
 
-  public function addCruise()
+  public function addProduct()
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_POST = filter_input_array(INPUT_POST);
@@ -69,7 +69,7 @@ class Managers extends Controller
     }
     $data['img'] = $_FILES["image"]["name"];
     
-    if($this->managerModel->addCruise($data)){
+    if($this->managerModel->addProduct($data)){
       move_uploaded_file($_FILES["image"]["tmp_name"], "./img/" . $data['img']);
       Flash('prd_added','Your product has been added successfully');
       redirect('Managers/cruises');
@@ -77,7 +77,7 @@ class Managers extends Controller
     
   }
 
-  public function updateCruise($id){
+  public function updateProduct($id){
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // here we process the form
       // Sanitize POST data
@@ -87,35 +87,9 @@ class Managers extends Controller
       $data['id'] = $id;
       $data['img'] = $_FILES["image"]["name"];
     }
-    if($this->managerModel->updateCruise($data)){
-      Flash('cruise_updated', 'Your cruise has been successfully updated');
-      redirect('Managers/cruises');
+    if($this->managerModel->updateProduct($data)){
+      Flash('cruise_updated', 'Your product has been successfully updated');
+      redirect('Managers/products');
     }
-  }
-
-  public function addShipPage()
-  {
-    $data = [
-      'title' => 'Add Ship'
-    ];
-
-    $this->view('managers/addShip', $data);
-  }
-
-  public function addShip()
-  {
-  }
-
-  public function addPortPage()
-  {
-    $data = [
-      'title' => 'Add cruises'
-    ];
-
-    $this->view('managers/addPort', $data);
-  }
-
-  public function addPort()
-  {
   }
 }

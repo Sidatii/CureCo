@@ -20,12 +20,12 @@
       $this->view('pages/about', $data);
     }
 
-    public function booking(){
+    public function store(){
       $data = [
         'title' => 'Book your trip'
       ];
 
-      $this->view('pages/booking', $data);
+      $this->view('pages/store', $data);
     }
 
     public function contact(){

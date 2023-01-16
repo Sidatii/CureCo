@@ -83,10 +83,10 @@ class Users extends Controller
   }
 
   public function createUserSession($user){
-    $_SESSION['user_id'] = $user->ID_user;
+    $_SESSION['user_id'] = $user->ID;
     $_SESSION['user_email'] = $user->email;
-    $_SESSION['user_fname'] = $user->firstName;
-    $_SESSION['user_lname'] = $user->lastName;
+    $_SESSION['user_fname'] = $user->first_name;
+    $_SESSION['user_lname'] = $user->last_name;
     $_SESSION['user_role'] = $user->role;
     $_SESSION['is_admin'] = 'block';
     $_SESSION['is_user'] = 'block';

@@ -8,7 +8,7 @@ class User{
 
     // Sign up user
     public function signup($data){
-        $this->db->query('INSERT INTO users (firstName, lastName, email, password)VALUES (:firstName, :lastName, :email, :password)');
+        $this->db->query('INSERT INTO users (first_name, last_name, email, password)VALUES (:firstName, :lastName, :email, :password)');
 
         // Bind values
         $this->db->bind(':firstName', $data['firstName']);

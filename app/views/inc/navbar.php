@@ -13,13 +13,6 @@
                         <div><?php echo $_SESSION['user_fname']; ?> <?php echo $_SESSION['user_lname']; ?> </div>
                     </div>
                     <ul class="py-1 text-sm text-gray-700" aria-labelledby="avatarButton">
-
-                        <li>
-                            <a href="<?php echo URLROOT . 'pages/dashboard'; ?>" class="<?php echo $_SESSION['is_admin']; ?> py-2 px-4 hover:bg-gray-100 ">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#" class="<?php echo $_SESSION['is_user']; ?> py-2 px-4 hover:bg-gray-100 ">My bookings</a>
-                        </li>
                         <li>
                             <a href="#" class="block py-2 px-4 hover:bg-gray-100 ">Settings</a>
                         </li>
@@ -51,9 +44,9 @@
                     <a href="<?php echo URLROOT . 'Managers/index'; ?>" class="<?php echo $_SESSION['is_admin'];?> block  py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:font-semibold md:p-0 dark:text-gray-400 dark:hover:bg-[#245BA8] sm:dark:hover:text-white  md:dark:hover:text-[#335f91] md:dark:hover:bg-transparent dark:border-gray-700 sm:text-[#335f91] font-medium font-alternate subpixel-antialiased" aria-current="page">Dashboard</a>
                 </li>
                 <li>
-                    <a href="<?php echo URLROOT . 'pages/booking'; ?>" class="<?php echo $_SESSION['is_user'];?> block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:font-semibold md:p-0 dark:text-gray-400 dark:hover:bg-[#245BA8] sm:dark:hover:text-white  md:dark:hover:text-[#335f91] md:dark:hover:bg-transparent dark:border-gray-700 sm:text-[#335f91] font-medium font-alternate subpixel-antialiased">Booking</a>
+                    <a href="<?php echo URLROOT . 'pages/store'; ?>" class="<?php echo $_SESSION['is_user'];?> block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:font-semibold md:p-0 dark:text-gray-400 dark:hover:bg-[#245BA8] sm:dark:hover:text-white  md:dark:hover:text-[#335f91] md:dark:hover:bg-transparent dark:border-gray-700 sm:text-[#335f91] font-medium font-alternate subpixel-antialiased">Store</a>
 
-                    <a href="<?php echo URLROOT . 'Managers/cruises'; ?>" class="<?php echo $_SESSION['is_admin'];?> block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:font-semibold md:p-0 dark:text-gray-400 dark:hover:bg-[#245BA8] sm:dark:hover:text-white  md:dark:hover:text-[#335f91] md:dark:hover:bg-transparent dark:border-gray-700 sm:text-[#335f91] font-medium font-alternate subpixel-antialiased">Cruises</a>
+                    <a href="<?php echo URLROOT . 'Managers/products'; ?>" class="<?php echo $_SESSION['is_admin'];?> block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:font-semibold md:p-0 dark:text-gray-400 dark:hover:bg-[#245BA8] sm:dark:hover:text-white  md:dark:hover:text-[#335f91] md:dark:hover:bg-transparent dark:border-gray-700 sm:text-[#335f91] font-medium font-alternate subpixel-antialiased">Products</a>
                 </li>
                 <li>
                     <a href="<?php echo URLROOT . 'Pages/about'; ?>" class="<?php echo $_SESSION['is_user'];?> block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:font-semibold md:p-0 dark:text-gray-400 dark:hover:bg-[#245BA8] sm:dark:hover:text-white  md:dark:hover:text-[#335f91] md:dark:hover:bg-transparent dark:border-gray-700 sm:text-[#335f91] font-medium font-alternate subpixel-antialiased">About</a>
