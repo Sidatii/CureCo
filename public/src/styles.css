@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    body {
+        font-family: 'Montserrat Alternates', sans-serif;
+    }
+}
+
+@font-face {
+    font-family: 'Drugs Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Drugs Regular'), url('Drugs.woff') format('woff');
+    }
