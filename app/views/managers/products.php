@@ -29,9 +29,9 @@
 <div class="flex flex-wrap gap-2 justify-center my-4 w-auto">
     <?php foreach ($data['products'] as $product) : ?>
         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
-                <img class="rounded-t-lg object-cover aspect-video" src="<?php echo URLROOT . '/public/img/' . $product->image; ?>" alt="" />
-            </a>
+            <div class="w">
+                <img class="rounded-t-lg object-cover" src="<?php echo URLROOT . '/public/img/' . $product->image; ?>" alt="" />
+            </div>
             <div class="p-5">
                 <h3 class="mb-2 text-center text-xl font-bold tracking-tight text-gray-900 dark:text-white"><?php echo $product->name; ?></h3>
                 <div class="text-center gap-2 mb-2">
