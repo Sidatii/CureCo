@@ -18,14 +18,14 @@ class Manager{
     }
 
     public function addProduct($data){
-        $this->db->query('INSERT INTO `produit`(`name`, `price`, `image`, `nights_number`, `departure_port_ID`, `departure_date`) VALUES(:name,:price,:image,:nights,:depPort,:depDate)');
+        $this->db->query('INSERT INTO `produit`(`name`, `price`, `image`, `quantity`, `IDC`, `discription`) VALUES(:name,:price,:image,:qty,:IDC,:disc)');
 
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':price', $data['price']);
         $this->db->bind(':image', $data['img']);
-        $this->db->bind(':nights', $data['nights']);
-        $this->db->bind(':depPort', $data['depPort']);
-        $this->db->bind(':depDate', $data['date']);
+        $this->db->bind(':qty', $data['qty']);
+        $this->db->bind(':IDC', $data['IDC']);
+        $this->db->bind(':disc', $data['disc']);
 
         return $this->db->execute();
     }
@@ -34,26 +34,27 @@ class Manager{
 
         if (empty($data->image)) {
         
-            $this->db->query('UPDATE `produit` SET `name`= :name ,`departure_date`= :date,`nights_number`=:nbr,`price`=:price,`departure_port_ID`=:idd WHERE `ID_croisere`=:id');
+            $this->db->query('UPDATE `produit` SET `name`= :name ,`discription`= :disc,`quantity`=:qty,`price`=:price,`IDC`=:idc WHERE `ID`=:id');
             
             $this->db->bind(':name', $data['name']);
-            $this->db->bind(':date', $data['date']);
-            $this->db->bind(':nbr', $data['nights']);
+            $this->db->bind(':disc', $data['disc']);
+            $this->db->bind(':qty', $data['quantity']);
             $this->db->bind(':price', $data['price']);
-            $this->db->bind(':idd', $data['depPort']);
+            $this->db->bind(':idc', $data['IDC']);
             $this->db->bind(':id', $data['id']);
             
             $this->db->execute();
             return true;
             
         }else{
-            $this->db->query('UPDATE `cruise` SET `name`= :name ,`departure_date`= :date,`nights_number`=:nbr,`Price`=:price,`departure_port_ID`=:idd,`image`=:img WHERE `ID_croisere`=:id');
+            $this->db->query('UPDATE `produit` SET `name`= :name ,`discription`= :disc,`quantity`=:qty,`price`=:price,`IDC`=:id, `image`=:img WHERE `ID`=:id');
+
     
             $this->db->bind(':name', $data['name']);
-            $this->db->bind(':date', $data['date']);
-            $this->db->bind(':nbr', $data['nights']);
+            $this->db->bind(':disc', $data['disc']);
+            $this->db->bind(':qty', $data['quantity']);
             $this->db->bind(':price', $data['price']);
-            $this->db->bind(':idd', $data['depPort']);
+            $this->db->bind(':id', $data['ID']);
             $this->db->bind(':img', $data['image']);
             $this->db->bind(':id', $data['id']);
     
@@ -61,6 +62,12 @@ class Manager{
             return true;
         }
 
+    }
+
+    public function getCategories(){
+        $this->db->query('SELECT * FROM category');
+        $results = $this->db->resultSet();
+        return $results;
     }
 }
 

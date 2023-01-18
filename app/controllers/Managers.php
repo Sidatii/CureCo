@@ -54,10 +54,10 @@ class Managers extends Controller
 
   public function addproductPage()
   {
-    $data = [
-      'title' => 'Add product'
-    ];
-
+    $categories = $this->managerModel->getCategories();
+        $data = [
+            'category' => $categories
+        ];
     $this->view('managers/addProduct', $data);
   }
 
@@ -72,7 +72,7 @@ class Managers extends Controller
     if($this->managerModel->addProduct($data)){
       move_uploaded_file($_FILES["image"]["tmp_name"], "./img/" . $data['img']);
       Flash('prd_added','Your product has been added successfully');
-      redirect('Managers/cruises');
+      redirect('Managers/products');
     }
     
   }
