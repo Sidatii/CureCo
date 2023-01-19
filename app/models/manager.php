@@ -12,9 +12,7 @@ class Manager{
                         FROM produit
                         ');
 
-        $results = $this->db->resultSet();
-
-        return $results;
+        return $this->db->resultSet();
     }
 
     public function addProduct($data){
@@ -58,17 +56,27 @@ class Manager{
             $this->db->bind(':img', $data['image']);
             $this->db->bind(':id', $data['id']);
     
-            $this->db->execute();
-            return true;
+            if($this->db->execute()){
+                return true;
+            }
+
         }
 
     }
 
     public function getCategories(){
         $this->db->query('SELECT * FROM category');
-        $results = $this->db->resultSet();
-        return $results;
+        return $this->db->resultSet();
+
+    }
+
+    public function delete($id){
+        $this->db->query('DELETE FROM produit WHERE ID=:id');
+        $this->db->bind('id', $id);
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
-
-?>
