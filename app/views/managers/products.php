@@ -20,6 +20,28 @@
             Add Product
         </button></a>
 </div>
+<div class="m-4 flex flex-row justify-center gap-5">
+    <a href="<?php echo URLROOT . 'managers/SortProductByPriceAsc' ?>">
+        <button type="button" class="text-white bg-[#245BA8] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-[#245BA8] dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Sort by price Ascending
+        </button>
+    </a>
+    <a href="<?php echo URLROOT . 'managers/SortProductByPriceDesc' ?>">
+        <button type="button" class="text-white bg-[#245BA8] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-[#245BA8] dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Sort by price Descending
+        </button>
+    </a>
+    <a href="<?php echo URLROOT . 'managers/SortProductByDateAsc' ?>">
+        <button type="button" class="text-white bg-[#245BA8] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-[#245BA8] dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Sort by date Ascending
+        </button>
+    </a>
+    <a href="<?php echo URLROOT . 'managers/SortProductByDateDesc' ?>">
+        <button type="button" class="text-white bg-[#245BA8] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-[#245BA8] dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Sort by date Descending
+        </button>
+    </a>
+</div>
 <CENTER>
     <?php Flash('prd_added'); ?>
     <?php Flash('prd_updated'); ?>
@@ -39,6 +61,8 @@
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><?php echo $product->discription; ?></p>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Quantity: <?php echo $product->quantity; ?></p>
                     <strong class="mb-3 font-normal text-gray-700 dark:text-gray-400">Price: <?php echo $product->price; ?> dh</strong>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Date: <?php echo $product->date; ?></p>
+
                 </div>
                 <div class="flex gap-2 justify-center">
 

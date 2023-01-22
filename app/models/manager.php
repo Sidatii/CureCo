@@ -79,4 +79,21 @@ class Manager{
             return false;
         }
     }
+
+    public function SortByPriceAsc(){
+        $this->db->query('SELECT * FROM produit order by `price` ASC');
+        return $this->db->execute();
+    }
+    public function SortByPriceDesc(){
+        $this->db->query('SELECT * FROM produit order by `price` DESC');
+        return $this->db->execute();
+    }
+    public function SortByDateAsc(){
+        $this->db->query('SELECT * FROM produit order by `date` ASC');
+        return $this->db->execute();
+    }
+    public function SortByDateDesc(){
+        $this->db->query('SELECT * FROM produit order by `date` DESC');
+        return $this->db->execute();
+    }
 }

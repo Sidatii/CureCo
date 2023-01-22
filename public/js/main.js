@@ -4,7 +4,7 @@ function deleteProduct(id){
 
 
 $(document).ready(function (){
-    $('#search').on('keyup',function (){
+    $('#search').onkeyup(function (){
         search_table($(this).value())
     })
     function search_table(value){
