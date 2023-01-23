@@ -111,8 +111,8 @@ class Managers extends Controller
 
     }
 
-    public function SortProductByPriceAsc(){
-        $products = $this->managerModel->SortByPriceAsc();
+    public function Sort($by, $order){
+        $products = $this->managerModel->Sort($by, $order);
         $categories = $this->managerModel->getCategories();
         $data = [
             'products' => $products,
@@ -120,31 +120,5 @@ class Managers extends Controller
         ];
         $this->view('Managers/products', $data);
     }
-    public function SortProductByPriceDesc(){
-        $products = $this->managerModel->SortByPriceDesc();
-        $categories = $this->managerModel->getCategories();
-        $data = [
-            'products' => $products,
-            'category' => $categories
-        ];
-        $this->view('Managers/products', $data);
-    }
-    public function SortProductByDateAsc(){
-        $products = $this->managerModel->SortByDateAsc();
-        $categories = $this->managerModel->getCategories();
-        $data = [
-            'products' => $products,
-            'category' => $categories
-        ];
-        $this->view('Managers/products', $data);
-    }
-    public function SortProductByDateDesc(){
-        $products = $this->managerModel->SortByDateDesc();
-        $categories = $this->managerModel->getCategories();
-        $data = [
-            'products' => $products,
-            'category' => $categories
-        ];
-        $this->view('Managers/products', $data);
-    }
+
 }
