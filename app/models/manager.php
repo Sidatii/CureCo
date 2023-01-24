@@ -84,4 +84,9 @@ class Manager{
         $this->db->query("SELECT * FROM produit ORDER BY $by $order");
         return $this->db->resultSet();
     }
+
+    public  function search($input){
+        $this->db->query("SELECT * FROM produit WHERE name LIKE '%$input%' OR discription LIKE '%$input%' OR price LIKE '%$input%'");
+        return $this->db->resultSet();
+    }
 }

@@ -121,4 +121,17 @@ class Managers extends Controller
         $this->view('Managers/products', $data);
     }
 
+    public function liveSearch(){
+        $categories = $this->managerModel->getCategories();
+        if (isset($_POST['input'])){
+            $input = $_POST['input'];
+            $data =[
+                'products' => $this->managerModel->search($input),
+                'categories' => $categories
+            ] ;
+            header('Content-type: application/json' );
+            echo json_encode($data);
+        }
+    }
+
 }
