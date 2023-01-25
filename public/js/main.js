@@ -4,19 +4,22 @@ function deleteProduct(id) {
 
 
 $(document).ready(function () {
-    $("#live_search").keyup(function () {
-        let input = $(this).val();
+    $("#live_search").on("change keyup paste", function(){
+        let input = $(this).val().trim();
         // alert(input)
-
-        if (input != "") {
+            $("#card").hide();
             $.ajax({
-                url: "../Managers/liveSearch", method: "POST", data: {input: input},
+                url: "../Managers/liveSearch",
+                method: "POST",
+                data: {input: input},
 
                 success: function (data) {
-                    // console.log(data['categories'][0]['name'])
-                    $("#card").hide();
+
+                    $('#results').empty();
+
                     for (let i = 0; i < data['products'].length; i++) {
-                        $("#card1").append(`<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" id="card">
+                    let cards = `
+                        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" id="card">
                         <div>
                             <img class="rounded-t-lg object-cover" src="<?php echo URLROOT . '/public/img/' . $product->image; ?>" alt=""/>
                         </div>
@@ -33,8 +36,7 @@ $(document).ready(function () {
                             </div>
                             <div class="flex gap-2 justify-center">
                                 <!-- Modal toggle -->
-                                <button data-modal-target="${data.products[i].ID}"
-                                        data-modal-toggle="${data.products[i].ID}"
+                                <button onclick="sheckTEst(${data.products[i].ID})"
                                         class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                         type="button">
                                     Edit
@@ -42,82 +44,7 @@ $(document).ready(function () {
                                 </button>
         
                                 <!-- Main modal -->
-                                <div id="${data.products[i].ID}" tabindex="-1" aria-hidden="true"
-                                     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-                                    <div class="relative w-full h-full max-w-md md:h-auto">
-                                        <!-- Modal content -->
-                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                            <button type="button"
-                                                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                                                    data-modal-hide="${data.products[i].ID}">
-                                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                          clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span class="sr-only">Close modal</span>
-                                            </button>
-                                            <div class="px-6 py-6 lg:px-8">
-                                                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Update
-                                                    cruise</h3>
-                                                <form class="space-y-6" method="POST"
-                                                      action="'../Managers/updateProduct/' + ${data.products[i].ID}"
-                                                      enctype="multipart/form-data">
-                                                    <div>
-                                                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Product
-                                                            name</label>
-                                                        <input type="text" name="name"
-                                                               class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 "
-                                                               value="${data.products[i].name}">
-                                                    </div>
-                                                    <div>
-                                                        <label for="disc" class="block mb-2 text-sm font-medium text-gray-900 ">Discription</label>
-                                                        <input type="text" name="date"
-                                                               class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 "
-                                                               value="${data.products[i].discription}">
-                                                    </div>
-                                                    <div>
-                                                        <label for="image"
-                                                               class="block mb-2 text-sm font-medium text-gray-900 ">Product
-                                                            image</label>
-                                                        <input type="file" accept="image/*" name="image"
-                                                               class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 ">
-                                                    </div>
-                                                    <div>
-                                                        <label for="qty" class="block mb-2 text-sm font-medium text-gray-900 ">Quantity</label>
-                                                        <input type="number" name="nights"
-                                                               class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 "
-                                                               value="${data.products[i].quantity}">
-                                                    </div>
-                                                    <div>
-                                                        <label for="price"
-                                                               class="block mb-2 text-sm font-medium text-gray-900 ">Price</label>
-                                                        <input type="text" name="depPort"
-                                                               class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500"
-                                                               value="${data.products[i].price}">
-                                                    </div>
-                                                    <div>
-                                                        <label for="category"
-                                                               class="block mb-2 text-sm font-medium text-gray-900 ">Category</label>
-                                                        <select name="IDC" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-4" name="ID" id="select">
-                                                            <script >
-                                                                for (let i = 0; i < data['categories'].length; i++){
-                                                                    let option = '<option value="${data['categories'][0]['ID']}">${data['categories'][i]['name']}</option>'
-                                                                    $("#select").append(option)
-                                                                }
-                                                            </script>
-                                                        </select>
-                                                    </div>
-                                                    <button type="submit"
-                                                            class="w-full text-white bg-[#245BA8] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#245BA8] dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                        Update product
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                           
         
                                 <button data-modal-target="${data.products[i].ID} + delete"
                                         data-modal-toggle="${data.products[i].ID} + delete"
@@ -167,30 +94,160 @@ $(document).ready(function () {
                                 </div>
                             </div>
                         </div>
-                    </div>`)
+                    </div>`
+                    let form = document.createElement('div')
+                    form.innerHTML = cards
+                        $("#results").append(form)
                     }
                 }
             })
 
-        } else {
-            $("#card").show();
-        }
-    });
+    })
 
-
-    // function search_table(value){
-    //     $('card').each(function (){
-    //         let found = 'false'
-    //         $(this).each(function (){
-    //             if($(this).text.toLowerCase().indexOf(value.toLowerCase())>=0){
-    //                 found = 'true'
-    //             }
-    //         })
-    //         if (found == 'true'){
-    //             $(this).show()
-    //         } else{
-    //             $(this).hide()
-    //         }
-    //     })
-    // }
 })
+
+function sheckTEst(id){
+    $.ajax({
+        url: "../Managers/selectById/"+{id},
+        method: "POST",
+        data: {id: id},
+
+        success: function (data) {
+            console.log(data.products[0].ID)
+            let element = `<div id="${id}" tabindex="-1" aria-modal="true"
+                                     class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full justify-center items-center flex" role="dialog">
+                                    <div class="relative w-full h-full max-w-md md:h-auto">
+                                        <!-- Modal content -->
+                                        <div  class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            <button type="button"
+                                                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                                                    data-modal-hide="${data.products[0].ID}" onclick="hidee(${id})">
+                                                    
+                                                <svg aria-modal="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                        </svg>
+                                                <span class="sr-only">Close modal</span>
+                                            </button>
+                                            <div class="px-6 py-6 lg:px-8">
+                                                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Update
+                                                    cruise</h3>
+                                                <form class="space-y-6" method="POST"
+                                                      action="http://localhost/CureCo/Managers/updateProduct/ + ${data.products[0].ID}"
+                                                      enctype="multipart/form-data">
+                                                    <div>
+                                                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Product
+                                                            name</label>
+                                                        <input type="text" name="name"
+                                                               class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 "
+                                                               value="${data.products[0].name}">
+                                                    </div>
+                                                    <div>
+                                                        <label for="disc" class="block mb-2 text-sm font-medium text-gray-900 ">Discription</label>
+                                                        <input type="text" name="date"
+                                                               class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 "
+                                                               value="${data.products[0].discription}">
+                                                    </div>
+                                                    <div>
+                                                        <label for="image"
+                                                               class="block mb-2 text-sm font-medium text-gray-900 ">Product
+                                                            image</label>
+                                                        <input type="file" accept="image/*" name="image"
+                                                               class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 ">
+                                                    </div>
+                                                    <div>
+                                                        <label for="qty" class="block mb-2 text-sm font-medium text-gray-900 ">Quantity</label>
+                                                        <input type="number" name="nights"
+                                                               class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 "
+                                                               value="${data.products[0].quantity}">
+                                                    </div>
+                                                    <div>
+                                                        <label for="price"
+                                                               class="block mb-2 text-sm font-medium text-gray-900 ">Price</label>
+                                                        <input type="text" name="depPort"
+                                                               class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500"
+                                                               value="${data.products[0].price}">
+                                                    </div>
+                                                    <div>
+                                                        <label for="category"
+                                                               class="block mb-2 text-sm font-medium text-gray-900 ">Category</label>
+                                                        <select name="IDC" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-4" name="ID" id="select">
+                                                            ${data.categories.map(item => `
+                                                            <option value="${item.ID}">${item.name}</option>
+                                                            `).join('')}
+                                                        </select>
+                                                    </div>
+                                                    <button type="submit"
+                                                            class="w-full text-white bg-[#245BA8] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#245BA8] dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                        Update product
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`
+            let ele = document.createElement('div')
+            ele.innerHTML = element
+            $('#update').append(ele)
+
+        }
+        })
+}
+
+function hidee(id){
+    let hideDiv =document.getElementById('id')
+    hideDiv.removeAttribute('class')
+    hideDiv.setAttribute('class','absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white hidden')
+}
+
+
+//<div id="10" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
+//                             <div class="relative w-full h-full max-w-md md:h-auto">
+//                                 <!-- Modal content -->
+//                                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+//                                     <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="10" fdprocessedid="qdsnu5">
+//                                         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+//                                             <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+//                                         </svg>
+//                                         <span class="sr-only">Close modal</span>
+//                                     </button>
+//                                     <div class="px-6 py-6 lg:px-8">
+//                                         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Update
+//                                             cruise</h3>
+//                                         <form class="space-y-6" method="POST" action="http://localhost/CureCo/Managers/updateProduct/10" enctype="multipart/form-data">
+//                                             <div>
+//                                                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Product
+//                                                     name</label>
+//                                                 <input type="text" name="name" class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 " value="sidati" fdprocessedid="1gs6h2">
+//                                             </div>
+//                                             <div>
+//                                                 <label for="disc" class="block mb-2 text-sm font-medium text-gray-900 ">Discription</label>
+//                                                 <input type="text" name="date" class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 " value="DZAFZFQDSVDVDS" fdprocessedid="x3nprl">
+//                                             </div>
+//                                             <div>
+//                                                 <label for="image" class="block mb-2 text-sm font-medium text-gray-900 ">Product
+//                                                     image</label>
+//                                                 <input type="file" accept="image/*" name="image" class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 ">
+//                                             </div>
+//                                             <div>
+//                                                 <label for="qty" class="block mb-2 text-sm font-medium text-gray-900 ">Quantity</label>
+//                                                 <input type="number" name="nights" class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 " value="4" fdprocessedid="yigv5">
+//                                             </div>
+//                                             <div>
+//                                                 <label for="price" class="block mb-2 text-sm font-medium text-gray-900 ">Price</label>
+//                                                 <input type="text" name="depPort" class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500" value="1000" fdprocessedid="vz0w2">
+//                                             </div>
+//                                             <div>
+//                                                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900 ">Category</label>
+//                                                 <select name="IDC" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-4" id="" fdprocessedid="uiww5p">
+//                                                                                                             <option value="0">
+//                                                             Paracetamol                                                        </option>
+//                                                                                                     </select>
+//                                             </div>
+//                                             <button type="submit" class="w-full text-white bg-[#245BA8] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#245BA8] dark:hover:bg-blue-700 dark:focus:ring-blue-800" fdprocessedid="o3wbre">
+//                                                 Update product
+//                                             </button>
+//                                         </form>
+//                                     </div>
+//                                 </div>
+//                             </div>
+//                         </div>

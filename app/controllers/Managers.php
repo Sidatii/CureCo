@@ -134,4 +134,20 @@ class Managers extends Controller
         }
     }
 
+    public function selectById()
+    {
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
+            $products = $this->managerModel->selectById($id);
+            $categories = $this->managerModel->getCategories();
+            $data = [
+                'products' => $products,
+                'categories' => $categories
+            ];
+            header('Content-type: application/json');
+            echo json_encode($data);
+
+        }
+    }
+
 }

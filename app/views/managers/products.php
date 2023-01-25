@@ -63,7 +63,9 @@
         <?php Flash('cruise_updated'); ?>
 
     </CENTER>
-    <div class="flex flex-wrap gap-2 justify-center my-4 w-auto" id="card1"></div>
+    <div id="update"></div>
+    <div class="flex flex-wrap gap-2 justify-center my-4 w-auto" id="results">
+    </div>
     <div class="flex flex-wrap gap-2 justify-center my-4 w-auto" id="card">
         <?php foreach ($data['products'] as $product) : ?>
             <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" >

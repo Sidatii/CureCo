@@ -89,4 +89,10 @@ class Manager{
         $this->db->query("SELECT * FROM produit WHERE name LIKE '%$input%' OR discription LIKE '%$input%' OR price LIKE '%$input%'");
         return $this->db->resultSet();
     }
+
+    public function selectById($id){
+        $this->db->query('SELECT * FROM produit WHERE ID=:id');
+        $this->db->bind(':id', $id);
+        return $this->db->resultSet();
+    }
 }
