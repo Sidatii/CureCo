@@ -100,8 +100,9 @@ class Managers extends Controller
             $_POST = filter_input_array(INPUT_POST);
             $data = $_POST;
             $data['id'] = $id;
-            $data['img'] = $_FILES["image"]["name"];
-//            var_dump($data['img']);
+            $data['image'] = $_FILES["image"]["name"];
+//            var_dump($data);
+//            exit();
 
             if ($this->managerModel->updateProduct($data)) {
                 move_uploaded_file($_FILES["image"]["tmp_name"], "./img/" . $data['img']);

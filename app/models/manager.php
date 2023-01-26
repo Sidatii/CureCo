@@ -30,29 +30,28 @@ class Manager{
 
     public function updateProduct($data){
 
-        if (empty($data->image)) {
+        if (empty($data['image'])) {
         
             $this->db->query('UPDATE `produit` SET `name`= :name ,`discription`= :disc,`quantity`=:qty,`price`=:price,`IDC`=:idc WHERE `ID`=:id');
             
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':disc', $data['disc']);
-            $this->db->bind(':qty', $data['quantity']);
+            $this->db->bind(':qty', $data['qty']);
             $this->db->bind(':price', $data['price']);
             $this->db->bind(':idc', $data['IDC']);
             $this->db->bind(':id', $data['id']);
-            
-            $this->db->execute();
-            return true;
+
+            return $this->db->execute();
             
         }else{
-            $this->db->query('UPDATE `produit` SET `name`= :name ,`discription`= :disc,`quantity`=:qty,`price`=:price,`IDC`=:id, `image`=:img WHERE `ID`=:id');
+            $this->db->query('UPDATE `produit` SET `name`= :name ,`discription`= :disc,`quantity`=:qty,`price`=:price,`IDC`=:idc, `image`=:img WHERE `ID`=:id');
 
     
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':disc', $data['disc']);
-            $this->db->bind(':qty', $data['quantity']);
+            $this->db->bind(':qty', $data['qty']);
             $this->db->bind(':price', $data['price']);
-            $this->db->bind(':id', $data['ID']);
+            $this->db->bind(':idc', $data['IDC']);
             $this->db->bind(':img', $data['image']);
             $this->db->bind(':id', $data['id']);
     

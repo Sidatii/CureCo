@@ -69,20 +69,20 @@
     </div>
     <div class="flex flex-wrap gap-2 justify-center my-4 w-auto" id="card">
         <?php foreach ($data['products'] as $product) : ?>
-            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md ">
                 <div class="h-[250px] w-[250px]">
                     <img class="rounded-t-lg object-fit h-full" style="aspect-ratio: 9/5"
                          src="<?php echo URLROOT . '/public/img/' . $product->image; ?>" alt=""/>
                 </div>
                 <div class="p-5">
-                    <h3 class="mb-2 text-center text-xl font-bold tracking-tight text-gray-900 dark:text-white"><?php echo $product->name; ?></h3>
+                    <h3 class="mb-2 text-center text-xl font-bold tracking-tight text-gray-900 "><?php echo $product->name; ?></h3>
                     <div class="text-center gap-2 mb-2">
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><?php echo $product->discription; ?></p>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                        <p class="mb-3 font-normal text-gray-700 "><?php echo $product->discription; ?></p>
+                        <p class="mb-3 font-normal text-gray-700 ">
                             Quantity: <?php echo $product->quantity; ?></p>
-                        <strong class="mb-3 font-normal text-gray-700 dark:text-gray-400">Price: <?php echo $product->price; ?>
+                        <strong class="mb-3 font-normal text-gray-700 ">Price: <?php echo $product->price; ?>
                             dh</strong>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                        <p class="mb-3 font-normal text-gray-700 ">
                             Date: <?php echo $product->date; ?></p>
 
                     </div>
@@ -129,7 +129,7 @@
                                             </div>
                                             <div>
                                                 <label for="disc" class="block mb-2 text-sm font-medium text-gray-900 ">Discription</label>
-                                                <input type="text" name="date"
+                                                <input type="text" name="disc"
                                                        class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 "
                                                        value="<?php echo $product->discription; ?>">
                                             </div>
@@ -142,14 +142,14 @@
                                             </div>
                                             <div>
                                                 <label for="qty" class="block mb-2 text-sm font-medium text-gray-900 ">Quantity</label>
-                                                <input type="number" name="nights"
+                                                <input type="number" name="qty"
                                                        class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 "
                                                        value="<?php echo $product->quantity; ?>">
                                             </div>
                                             <div>
                                                 <label for="price"
                                                        class="block mb-2 text-sm font-medium text-gray-900 ">Price</label>
-                                                <input type="text" name="depPort"
+                                                <input type="text" name="price"
                                                        class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500"
                                                        value="<?php echo $product->price; ?>">
                                             </div>
@@ -158,7 +158,7 @@
                                                        class="block mb-2 text-sm font-medium text-gray-900 ">Category</label>
                                                 <select name="IDC"
                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-4"
-                                                        name="ID" id="">
+                                                        name="ID">
                                                     <?php foreach ($data['category'] as $category) : ?>
                                                         <option value="<?php echo $category->ID; ?>">
                                                             <?php echo $category->name; ?>
@@ -309,6 +309,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div>
+
+
         </div>
 
         <div id="<?php echo $product->ID . "delete"; ?>" tabindex="-1"

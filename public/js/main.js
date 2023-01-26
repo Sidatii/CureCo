@@ -1,5 +1,5 @@
 function deleteProduct(id) {
-    location.href = 'delete/' + id
+    location.href = 'http://localhost/CureCo/public/Managers/delete/' + id
 }
 
 
@@ -18,19 +18,19 @@ $(document).ready(function () {
 
                     for (let i = 0; i < data['products'].length; i++) {
                     let cards = `
-                        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" id="card">
+                        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md " id="card">
                         <div class="h-[250px] w-[250px]" id="image">
                             <img  class="rounded-t-lg object-fit h-full" style="aspect-ratio: 9/5" src="http://localhost/CureCo/public/img/${data.products[i].image}"/>
                         </div>
                         <div class="p-5">
-                            <h3 class="mb-2 text-center text-xl font-bold tracking-tight text-gray-900 dark:text-white">${data.products[i].name}</h3>
+                            <h3 class="mb-2 text-center text-xl font-bold tracking-tight text-gray-900 ">${data.products[i].name}</h3>
                             <div class="text-center gap-2 mb-2">
-                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">${data.products[i].discription}</p>
-                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                <p class="mb-3 font-normal text-gray-700 ">${data.products[i].discription}</p>
+                                <p class="mb-3 font-normal text-gray-700 ">
                                     Quantity: ${data.products[i].quantity}</p>
-                                <strong class="mb-3 font-normal text-gray-700 dark:text-gray-400">Price: ${data.products[i].price}
+                                <strong class="mb-3 font-normal text-gray-700 ">Price: ${data.products[i].price}
                                     dh</strong>
-                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                <p class="mb-3 font-normal text-gray-700 ">
                                     Date: ${data.products[i].date}</p>
                             </div>
                             <div class="flex gap-2 justify-center">
