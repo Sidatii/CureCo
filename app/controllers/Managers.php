@@ -16,7 +16,10 @@ class Managers extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Admin dashboard'
+            'totalProducts' => $this->managerModel->totalProducts(),
+            'totalCategories' => $this->managerModel->totalCategories(),
+            'avgPrice' => $this->managerModel->avgPrice(),
+            'minPrice' => $this->managerModel->minPrice(),
         ];
 
         $this->view('managers/dashboard', $data);
@@ -27,10 +30,13 @@ class Managers extends Controller
         // Get products
         $products = $this->managerModel->getProducts();
         $categories = $this->managerModel->getCategories();
+
         $data = [
             'products' => $products,
-            'category' => $categories
+            'category' => $categories,
         ];
+//        var_dump($data['avgPrice'][0]->avgPrice);
+//        exit();
 
         $this->view('managers/products', $data);
     }
@@ -66,15 +72,21 @@ class Managers extends Controller
     public function addProduct()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $categories = $this->managerModel->getCategories();
             $_POST = filter_input_array(INPUT_POST);
-            $data = $_POST;
+            $data = [
+                'category' => $categories,
+                'post' => $_POST,
+                'image' => $_FILES["image"]["name"]
+            ];
+//            var_dump($data['categories']);
+//            die();
 
-            $data['image'] = $_FILES["image"]["name"];
 
             if ($this->managerModel->addProduct($data)) {
                 move_uploaded_file($_FILES["image"]["tmp_name"], "./img/" . $data['image']);
                 Flash('prd_added', 'Your product has been added successfully');
-                redirect('Managers/products');
+                $this->view('Managers/addProduct', $data);
             }
         }
     }

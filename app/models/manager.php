@@ -18,12 +18,12 @@ class Manager{
     public function addProduct($data){
         $this->db->query('INSERT INTO `produit`(`name`, `price`, `image`, `quantity`, `IDC`, `discription`) VALUES(:name,:price,:image,:qty,:IDC,:disc)');
 
-        $this->db->bind(':name', $data['name']);
-        $this->db->bind(':price', $data['price']);
-        $this->db->bind(':image', $data['img']);
-        $this->db->bind(':qty', $data['qty']);
-        $this->db->bind(':IDC', $data['IDC']);
-        $this->db->bind(':disc', $data['disc']);
+        $this->db->bind(':name', $data['post']['name']);
+        $this->db->bind(':price', $data['post']['price']);
+        $this->db->bind(':image', $data['image']);
+        $this->db->bind(':qty', $data['post']['qty']);
+        $this->db->bind(':IDC', $data['post']['IDC']);
+        $this->db->bind(':disc', $data['post']['disc']);
 
         return $this->db->execute();
     }
@@ -93,6 +93,26 @@ class Manager{
     public function selectById($id){
         $this->db->query('SELECT * FROM produit WHERE ID=:id');
         $this->db->bind(':id', $id);
+        return $this->db->resultSet();
+    }
+
+    public function totalProducts(){
+        $this->db->query('SELECT COUNT(ID) AS totalProducts FROM produit');
+        return $this->db->resultSet();
+    }
+
+    public function avgPrice(){
+        $this->db->query('SELECT AVG(price) AS avgPrice FROM produit');
+        return $this->db->resultSet();
+    }
+
+    public function totalCategories(){
+        $this->db->query('SELECT COUNT(ID) AS totalCategories FROM category');
+        return $this->db->resultSet();
+    }
+
+    public function minPrice(){
+        $this->db->query('SELECT MIN(price) AS minPrice FROM produit');
         return $this->db->resultSet();
     }
 }

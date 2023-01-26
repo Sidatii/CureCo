@@ -17,5 +17,5 @@
   <title><?php echo SITENAME; ?></title>
 </head>
 
-<body class="w-full">
+<body class="w-full" >
   
