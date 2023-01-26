@@ -14,20 +14,13 @@ $(document).ready(function () {
                 data: {input: input},
 
                 success: function (data) {
-                    $('#image').find('img').each(function(){
-                        var srcpath = $(this).attr('src');
-                    console.log("http://localhost/CureCo/public/img/"+ data.products.image)
-                        srcpath = srcpath.replace('image',data.products.image);
-                        $(this).attr('src',srcpath);
-                    });
-
                     $('#results').empty();
 
                     for (let i = 0; i < data['products'].length; i++) {
                     let cards = `
                         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" id="card">
                         <div class="h-[250px] w-[250px]" id="image">
-                            <img  class="rounded-t-lg object-fit h-full" style="aspect-ratio: 9/5" src="http://localhost/CureCo/public/img/image"/>
+                            <img  class="rounded-t-lg object-fit h-full" style="aspect-ratio: 9/5" src="http://localhost/CureCo/public/img/${data.products[i].image}"/>
                         </div>
                         <div class="p-5">
                             <h3 class="mb-2 text-center text-xl font-bold tracking-tight text-gray-900 dark:text-white">${data.products[i].name}</h3>
@@ -47,7 +40,7 @@ $(document).ready(function () {
                                     class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     type="button">
                                     Edit
-                                    <i class="fa-light fa-pen-to-square"></i>
+                                    <i class="fa fa-pen-to-square"></i>
                                 </button>
                                 <!-- Main delete modal -->
                                 <button value="${data.products[i].ID}" data-modal-target="${data.products[i].ID} + delete"
